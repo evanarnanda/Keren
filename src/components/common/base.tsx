@@ -1,7 +1,7 @@
 import { Html } from '@elysiajs/html'
 export default function BaseHtml( { children }: { children: JSX.Element } ) {
   return (
-    <html lang='en' >
+    <html lang='en' data-theme="light">
         
         <head>
             <meta charset="utf-8" />
@@ -13,8 +13,8 @@ export default function BaseHtml( { children }: { children: JSX.Element } ) {
         </head>
         <body class="bg-background text-foreground">
             {children}
+            <script src="/public/theme.js"></script>
         </body>
-        {/* <script src="/public/theme.js"></script> */}
     </html>
   )
 }
