@@ -9,6 +9,7 @@ export const signUpRouter = new Elysia({prefix: '/signup'})
   <BaseHtml>
   <>
     <SignUp />
+    <Footer />
   </>
   </BaseHtml>
 ))

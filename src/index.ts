@@ -7,6 +7,7 @@ import html from "@elysiajs/html";
 import staticPlugin from "@elysiajs/static";
 import { logger } from "@bogeychan/elysia-logger";
 import { authRouter } from "./pages/auth";
+import { apiRouter } from "./api";
 
 const app = new Elysia()
 .use(cors())
@@ -19,6 +20,7 @@ const app = new Elysia()
   })
 )
 .all("/api/auth/*", betterAuthView)
+.use(apiRouter)
 .use(pageRouter)
 .use(authRouter)
 .get("/hello", () => "Hello Elysia").listen(3000);
