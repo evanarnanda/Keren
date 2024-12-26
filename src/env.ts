@@ -2,7 +2,9 @@ import { z } from 'zod'
 
 const envSchema = z.object({
   PORT: z.coerce.number().min(1000).default(3000),
+  ALLOWED_ORIGINS: z.string().default('http://localhost:3000'),
   BASE_URL: z.string().default('http://localhost:3000'),
+  BETTER_AUTH_SECRET: z.string(),
   NODE_ENV: z.enum(
     [
       'development',
@@ -23,6 +25,8 @@ const envSchema = z.object({
 const envServer = envSchema.safeParse({
   PORT: process.env.PORT,
   BASE_URL: process.env.BASE_URL,
+  ALLOWED_ORIGINS: process.env.ALLOWED_ORIGINS,
+  BETTER_AUTH_SECRET: process.env.BETTER_AUTH_SECRET,
   NODE_ENV: process.env.NODE_ENV,
   DATABASE_URL: process.env.DATABASE_URL,
   GOOGLE_CLIENT_ID: process.env.GOOGLE_CLIENT_ID,

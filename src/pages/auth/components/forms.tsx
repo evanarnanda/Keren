@@ -3,6 +3,7 @@ import { Spinner } from "@/components/common/loading/spinner";
 
 interface Error {
   email?: string[] 
+  name?: string[]
   password?: string[] 
   confirmPassword?: string[] 
   others?: string[]
@@ -11,19 +12,21 @@ interface Error {
 interface SignUpFormProps {
   error: Error
   emailValue?: string
+  nameValue?: string
   passwordValue?: string
   confirmPasswordValue?: string
 }
 function SignInForm({error}: {error: Error}) {
+
   return (
     <div class="card bg-base-100 w-96 shadow-xl" id='signin-form'>
       <div class="card-body">
         <h2 class="card-title">Sign In!</h2>
         <form class='flex flex-col space-y-2' hx-post='/api/v1/auth/signin' hx-target="#signin-form" hx-swap='outerHTML' hx-disabled-elt="find button" hx-indicator="#spinner">
-          <button class="btn">
+          <a class="btn">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-square-menu h-4 w-4 opacity-70"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M7 8h10"/><path d="M7 12h10"/><path d="M7 16h10"/></svg>
             Login Google!
-          </button>
+          </a>
           {error.email != undefined ?
             <div class='form-control'>
               <label class="input input-bordered input-error flex items-center gap-2">
@@ -113,7 +116,7 @@ function SignInForm({error}: {error: Error}) {
   )
 }
 
-function SignUpForm({ error, emailValue, passwordValue, confirmPasswordValue }: SignUpFormProps) {
+function SignUpForm({ error, emailValue, nameValue, passwordValue }: SignUpFormProps) {
   return (
     <div class="card bg-base-100 w-96 shadow-xl" id='signup-form'>
       <div class="card-body">
@@ -151,6 +154,40 @@ function SignUpForm({ error, emailValue, passwordValue, confirmPasswordValue }: 
                   d="M15 6.954 8.978 9.86a2.25 2.25 0 0 1-1.956 0L1 6.954V11.5A1.5 1.5 0 0 0 2.5 13h11a1.5 1.5 0 0 0 1.5-1.5V6.954Z" />
               </svg>
               <input type="text" class="grow" placeholder="Email" name="email" value={emailValue ?? ''}/>
+            </label>
+          }
+          {error.name != undefined?
+            <div class='form-control'>
+              <label class="input input-bordered input-error flex items-center gap-2">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 16 16"
+                  fill="currentColor"
+                  class="h-4 w-4 opacity-70">
+                  <path
+                    d="M2.5 3A1.5 1.5 0 0 0 1 4.5v.793c.026.009.051.02.076.032L7.674 8.51c.206.1.446.1.652 0l6.598-3.185A.755.755 0 0 1 15 5.293V4.5A1.5 1.5 0 0 0 13.5 3h-11Z" />
+                  <path
+                    d="M15 6.954 8.978 9.86a2.25 2.25 0 0 1-1.956 0L1 6.954V11.5A1.5 1.5 0 0 0 2.5 13h11a1.5 1.5 0 0 0 1.5-1.5V6.954Z" />
+                </svg>
+                <input type="text" class="grow" placeholder="Name" name="name"/>
+              </label>
+              <div class="label">
+                <span class="label-text-alt text-error">{error.name}</span>
+              </div>
+            </div>
+            :
+            <label class="input input-bordered flex items-center gap-2">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 16 16"
+                fill="currentColor"
+                class="h-4 w-4 opacity-70">
+                <path
+                  d="M2.5 3A1.5 1.5 0 0 0 1 4.5v.793c.026.009.051.02.076.032L7.674 8.51c.206.1.446.1.652 0l6.598-3.185A.755.755 0 0 1 15 5.293V4.5A1.5 1.5 0 0 0 13.5 3h-11Z" />
+                <path
+                  d="M15 6.954 8.978 9.86a2.25 2.25 0 0 1-1.956 0L1 6.954V11.5A1.5 1.5 0 0 0 2.5 13h11a1.5 1.5 0 0 0 1.5-1.5V6.954Z" />
+              </svg>
+              <input type="text" class="grow" placeholder="Name" name="name" value={nameValue ?? ''}/>
             </label>
           }
           { error.password != undefined ? 
